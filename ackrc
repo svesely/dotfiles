@@ -1,0 +1,11 @@
+--type-add=ruby=.haml,.rake,.feature,.scss
+--type-set=slim=.slim
+--type-set=haml=.haml
+--type-set=cucumber=.feature
+--type-set=coffee=.coffee
+--type-set=slim=.slim
+--ignore-dir=log
+--ignore-dir=tmp
+--ignore-dir=.git
+--ignore-dir=cache
+--ignore-file=match:tags

@@ -1,0 +1,27 @@
+[
+  {
+    "directory": "HOME",
+    "links": [
+      { "file": "ackrc", "link": ".ackrc" },
+      { "file": "agignore", "link": ".agignore" },
+      { "file": "ansible.cfg", "link": ".ansible.cfg" },
+      { "file": "fzf.zsh", "link": ".fzf.zsh" },
+      { "file": "gemrc", "link": ".gemrc" },
+      { "file": "gitconfig", "link": ".gitconfig" },
+      { "file": "gitignore", "link": ".gitignore" },
+      { "file": "tmux.conf", "link": ".tmux.conf" },
+      { "file": "zshrc", "link": ".zshrc" },
+      { "file": "vimrc", "link": ".vimrc" },
+      { "file": "nvim.init.lua", "link": ".config/nvim/init.lua" },
+      { "file": "vesopolis.zsh-theme", "link": ".oh-my-zsh/themes/vesopolis.zsh-theme" }
+    ]
+  },
+  {
+    "directory": "vim",
+    "links": [
+      { "file": "vimrc.after.conf", "link": "vimrc.after.conf" },
+      { "file": "vimrc.before.conf", "link": "vimrc.before.conf" },
+      { "file": "plug.conf", "link": "plug.conf" }
+    ]
+  }
+]

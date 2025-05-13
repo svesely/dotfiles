@@ -1,0 +1,88 @@
+[user]
+	email = scott@vesmail.com
+	name = Scott Vesely
+
+[color]
+  branch = auto
+  diff = auto
+  status = auto
+
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+
+[core]
+  excludesfile = ~/.gitignore
+	editor = mvim -v -f
+	symlinks = false
+
+[branch "master"]
+  remote = origin
+  merge = refs/heads/master
+
+[branch "develop"]
+  remote = origin
+  merge = refs/heads/develop
+
+[alias]
+  a = add
+  aa= !git add -u && git add . && git status
+  amend = commit --amend --no-edit
+  b = branch
+  c = commit -m
+  ci = commit
+  co = checkout
+  cob = checkout -b
+  dc = diff --cached
+  dh1 = diff HEAD~1
+  di = diff
+  div = divergence
+  done = !git fetch && git rebase origin/develop && git checkout develop && git merge @{-1} && rake && git push
+  ds = diff --stat=160,120
+  fa = fetch --all
+  ff = merge --ff-only
+  gn = goodness
+  gnc = goodness --cached
+  h = !git head
+  head = !git l -1
+  hp = "!source ~/.githelpers && show_git_head"
+  ir = !git rebase -i origin/develop
+  l = "!source ~/.githelpers && pretty_git_log"
+  la = !git l --all
+  noff = merge --no-ff
+  pom = push origin master
+  pullff = pull --ff-only
+  r = !git l -20
+  ra = !git r --all
+  st = status
+  up = !git fetch origin && git merge origin/develop --no-ff
+  pretty = log --pretty=format:'%h was %an, %ar, message: %s'
+  sr = log --pretty=format:'%h was %an, %ar, message: %s' --author vesely --since '1 week ago' --reverse
+  latest = !git for-each-ref --sort=-committerdate refs/heads/ | sed 's/^.*refs\\/heads\\///'
+  start = !trello start
+  deliver = !trello finish
+
+[push]
+	default = simple
+	autoSetupRemote = true
+[pager]
+  branch = false
+[init]
+	defaultBranch = main
+[branch]
+	sort = -committerdate
+[pull]
+	rebase = true
+[fetch]
+	prune = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge --skip -- %f
+	process = git-lfs filter-process --skip
+	required = true

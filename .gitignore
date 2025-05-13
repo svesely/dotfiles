@@ -1,0 +1,14 @@
+old_versions/
+bin
+.DS_Store
+.svn
+*~
+.*.swp
+tags
+*.rbc
+.rvmrc
+.pt
+starting.feature
+config/initializers/selenium.rb
+log/*.log
+**/~*
