@@ -40,6 +40,7 @@ fi
 # For a full list of active aliases, run `alias`.
 #
 alias ack="rg"
+alias vim="nvim"
 
 # lucky enough not to deal with kubernetes nowadays...
 # if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
@@ -62,3 +63,5 @@ setopt sharehistory
 ctags=/opt/brew/bin/ctags
 
 source <(fzf --zsh)
+
+. "$HOME/.local/bin/env"

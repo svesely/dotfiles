@@ -98,19 +98,6 @@ vim.opt.visualbell = false
 -- Cursor shape settings
 vim.opt.guicursor = 'n-v-c:block-Cursor/lCursor-blinkon1,i-ci:ver25-Cursor/lCursor-blinkon1,r-cr:hor20-Cursor/lCursor-blinkon1'
 
--- Vimwiki
-vim.keymap.set('n', '<leader>cc', '<Plug>VimwikiToggleListItem')
-vim.g.vimwiki_list = {{
-  path = '~/vimwiki/',
-  syntax = 'markdown',
-  ext = '.md'
-}}
-
--- Autocommands for vimwiki
-vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
-  pattern = "*/vimwiki/*",
-  command = "set filetype=vimwiki"
-})
 
 -- Persistent undo
 vim.opt.undofile = true
@@ -132,6 +119,16 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = 'text',
   group = pencil_group,
   command = 'call pencil#init()'
+})
+
+vim.api.nvim_create_augroup('filetype_wrap', { clear = true })
+vim.api.nvim_create_autocmd('FileType', {
+  group = 'filetype_wrap',
+  pattern = { 'markdown', 'fountain' },
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.linebreak = true
+  end
 })
 
 -- Commands
@@ -163,11 +160,23 @@ vim.opt.rtp:prepend(lazypath)
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
-    { 'altercation/vim-colors-solarized', lazy = false },
     -- theme/color schemes
     { 'dracula/vim', name = 'dracula'},
-    { 'lifepillar/vim-solarized8', lazy = false },
     { 'vimwiki/vimwiki', lazy = false },
+
+-- -- Vimwiki
+-- vim.keymap.set('n', '<leader>cc', '<Plug>VimwikiToggleListItem')
+-- vim.g.vimwiki_list = {{
+--   path = '~/vimwiki/',
+--   syntax = 'markdown',
+--   ext = '.md'
+-- }}
+
+-- -- Autocommands for vimwiki
+-- vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+--   pattern = "*/vimwiki/*",
+--   command = "set filetype=vimwiki"
+-- })
 
     -- editor enhancements
     'editorconfig/editorconfig-vim',
@@ -179,6 +188,18 @@ require("lazy").setup({
     'easymotion/vim-easymotion',
     'junegunn/vim-easy-align',
     'reedes/vim-pencil',
+
+    -- colorful markdown preview mainly for CodeCompanion
+    {
+      "OXY2DEV/markview.nvim",
+      lazy = false,
+      opts = {
+        preview = {
+          filetypes = { "markdown", "codecompanion" },
+          ignore_buftypes = {},
+        },
+      },
+    },
 
     -- navigation and file management
     'preservim/nerdtree',
@@ -205,7 +226,23 @@ require("lazy").setup({
     'mileszs/ack.vim',
 
     -- status line
-    'vim-airline/vim-airline'
+    'vim-airline/vim-airline',
+    "00msjr/nvim-fountain",
+    ft = "fountain",  -- Lazy-load only for fountain files
+    config = function()
+      require("nvim-fountain").setup({
+        -- Optional configuration
+        keymaps = {
+          next_scene = "]]",
+          prev_scene = "[[",
+          uppercase_line = "<S-CR>",
+        },
+        -- Export configuration
+        export = {
+          pdf = { options = "--overwrite --font Courier" },
+        },
+      })
+    end,
 
   },
   -- Configure any other settings here. See the documentation for more details.
@@ -214,9 +251,6 @@ require("lazy").setup({
   -- automatically check for plugin updates
   checker = { enabled = true },
 })
-
--- Set colorscheme
-vim.cmd('colorscheme solarized8')  -- Using vim.cmd for direct Vim commands
 
 -- Plugin Specific Settings
 
@@ -230,12 +264,11 @@ vim.g.gitgutter_max_signs = 500
 -- Coc.nvim recommended settings
 vim.opt.updatetime = 300
 vim.opt.signcolumn = 'yes'
-
 -- Use tab for trigger completion with coc.nvim
 local keyset = vim.keymap.set
 function _G.check_back_space()
-    local col = vim.fn.col('.') - 1
-    return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
+  local col = vim.fn.col('.') - 1
+  return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
 end
 
 local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
@@ -256,3 +289,17 @@ if vim.fn.executable('rg') == 1 then
   vim.g.ackprg = 'rg --vimgrep --no-heading'
 end
 
+-- Treesitter setup
+-- Setup Tree-sitter
+local ok, treesitter = pcall(require, "nvim-treesitter.configs")
+if ok then
+  treesitter.setup({
+    ensure_installed = { "lua", "markdown", "markdown_inline", "yaml" },
+    highlight = { enable = true },
+  })
+end
+
+vim.keymap.set('n', '<leader>ccc', ':CodeCompanionChat<CR>')
+
+-- Set colorscheme
+vim.cmd 'colorscheme dracula'
