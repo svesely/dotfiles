@@ -55,8 +55,8 @@ export GOPATH=~
 export GO111MODULE=on
 
 export HISTFILE="$HOME/.zsh_history"
-export HISTSIZE=1000000000
-export SAVEHIST=1000000000
+export HISTSIZE=1000000
+export SAVEHIST=1000000
 setopt EXTENDED_HISTORY
 SHELL_SESSIONS_DISABLE=1
 setopt sharehistory

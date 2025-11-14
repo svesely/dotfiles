@@ -220,7 +220,6 @@ require("lazy").setup({
     -- language specific plugins
     'rodjek/vim-puppet',
     'stevearc/vim-arduino',
-    'keith/swift',
 
     -- search
     'mileszs/ack.vim',
