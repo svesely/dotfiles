@@ -205,6 +205,7 @@ require("lazy").setup({
     'preservim/nerdtree',
     'xuyuanp/nerdtree-git-plugin',
     'junegunn/fzf',
+    'vim-crystal/vim-crystal',
     'jeetsukumaran/vim-buffergator',
     'mbbill/undotree',
 

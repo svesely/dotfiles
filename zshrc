@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:$HOME/.rbenv/bin:/opt/brew/bin:/opt/brew/sbin/:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:$HOME/.cli-scripts/bin:$PATH:$HOME/Library/Python/2.7/bin
+export PATH=$HOME/bin:$HOME/.rbenv/bin:/opt/homebrew/bin:/opt/homebrew/sbin/:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:$HOME/.cli-scripts/bin:$PATH:$HOME/Library/Python/2.7/bin
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -41,6 +41,7 @@ fi
 #
 alias ack="rg"
 alias vim="nvim"
+alias updatenvim="nvim --headless \"+Lazy! sync\" +qa"
 
 # lucky enough not to deal with kubernetes nowadays...
 # if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
@@ -60,7 +61,7 @@ export SAVEHIST=1000000
 setopt EXTENDED_HISTORY
 SHELL_SESSIONS_DISABLE=1
 setopt sharehistory
-ctags=/opt/brew/bin/ctags
+ctags=/opt/homebrew/bin/ctags
 
 source <(fzf --zsh)
 
